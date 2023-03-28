@@ -1,68 +1,43 @@
-export interface Teacher {
-  readonly firstName: string;
-  readonly lastName: string;
-  fullTimeEmployee: boolean;
-  yearsOfExperience?: number;
+interface Student {
+  firstName: string;
+  lastName: string;
+  age: number;
   location: string;
-  [propName: string]: any;
 }
 
-const teacher3: Teacher = {
-  firstName: 'John',
-  fullTimeEmployee: false,
-  lastName: 'Doe',
-  location: 'London',
-  contract: false,
+const student1: Student = {
+  firstName: 'Pedro',
+  lastName: 'Perez',
+  age: 20,
+  location:'Cali',
 };
 
-console.log(teacher3);
-
-export interface Directors extends Teacher {
-  numberOfReports: number;
-}
-
-const director1: Directors = {
-  firstName: 'John',
-  fullTimeEmployee: true,
-  lastName: 'Doe',
-  location: 'London',
-  numberOfReports: 17,
+const student2: Student = {
+  firstName: 'Laura',
+  lastName: 'Marin',
+  age: 21,
+  location:'Bogota',
 };
 
-console.log(director1);
+const studentsList: Student[] = [student1, student2];
 
-interface printTeacherFunction {
-  (firstName: string, lastName: string): string,
-}
+const tableHtml = `
+  <table>
+    <thead>
+      <tr>
+        <th>firstName</th>
+        <th>location</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${studentsList.map((student) => `
+        <tr>
+          <td>${student.firstName}</td>
+          <td>${student.location}</td>
+        </tr>
+      `).join('')}
+    </tbody>
+  </table>
+`;
 
-export const printTeacher: printTeacherFunction = (firstName, lastName) => {
-  return `${firstName[0]}, ${lastName}`;
-}
-
-export interface StudentConstructor {
-  new(firstName: string, lastName: string): StudentClassInterface;
-}
-
-export interface StudentClassInterface {
-  firstName: string;
-  lastName: string;
-  workOnHomework(): string;
-  displayName(): string;
-}
-
-export class StudentClass implements StudentClassInterface {
-  firstName: string;
-  lastName: string;
-  constructor(firstName: string, lastName: string) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-  }
-
-  workOnHomework(): string {
-    return "Currently working";
-  }
-
-  displayName(): string {
-    return this.firstName;
-  }
-}
+document.body.innerHTML = tableHtml;
