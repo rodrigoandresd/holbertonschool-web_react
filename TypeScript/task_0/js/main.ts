@@ -1,43 +1,18 @@
-interface Student {
-  firstName: string;
-  lastName: string;
-  age: number;
+export interface Teacher {
+  readonly firstName: string;
+  readonly lastName: string;
+  fullTimeEmployee: boolean;
+  yearsOfExperience?: number;
   location: string;
+  [propName: string]: any;
 }
 
-const student1: Student = {
-  firstName: 'Pedro',
-  lastName: 'Perez',
-  age: 20,
-  location:'Cali',
+const teacher3: Teacher = {
+  firstName: 'John',
+  fullTimeEmployee: false,
+  lastName: 'Doe',
+  location: 'London',
+  contract: false,
 };
 
-const student2: Student = {
-  firstName: 'Laura',
-  lastName: 'Marin',
-  age: 21,
-  location:'Bogota',
-};
-
-const studentsList: Student[] = [student1, student2];
-
-const tableHtml = `
-  <table>
-    <thead>
-      <tr>
-        <th>firstName</th>
-        <th>location</th>
-      </tr>
-    </thead>
-    <tbody>
-      ${studentsList.map((student) => `
-        <tr>
-          <td>${student.firstName}</td>
-          <td>${student.location}</td>
-        </tr>
-      `).join('')}
-    </tbody>
-  </table>
-`;
-
-document.body.innerHTML = tableHtml;
+console.log(teacher3);
